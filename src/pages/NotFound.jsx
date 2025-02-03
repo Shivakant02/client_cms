@@ -1,0 +1,9 @@
+function NotFound() {
+  return (
+    <div className="flex justify-center items-center h-screen">
+        <h1 className=" text-4xl font-bold text-yellow-600">OOPS, Page Not Found</h1>
+    </div>
+  )
+}
+
+export default NotFound
