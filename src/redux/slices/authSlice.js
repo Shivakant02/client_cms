@@ -27,7 +27,7 @@ export const signup = createAsyncThunk("/auth/signup", async (data) => {
   });
 export const login = createAsyncThunk("/auth/login", async (data) => {
     try {
-      const response = axiosInstance.post("/user/login", data);
+      const response = axiosInstance.post("/user/signin", data);
       toast.promise(response, {
         loading: "Wait! logging in your account",
         success: (data) => {
@@ -49,6 +49,15 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
     extraReducers:(builder)=>{
         builder
         .addCase(signup.fulfilled,(state,action)=>{
+            state.isLoggedIn=true;
+            state.role=action.payload.data.user.role;
+            state.currentUser=action.payload.data.user;
+            localStorage.setItem("isLoggedIn",true);
+            localStorage.setItem("role",action.payload.data.user.role);
+            localStorage.setItem("currentUser",JSON.stringify(action.payload.data.user));
+        });
+        builder
+        .addCase(login.fulfilled,(state,action)=>{
             state.isLoggedIn=true;
             state.role=action.payload.data.user.role;
             state.currentUser=action.payload.data.user;
