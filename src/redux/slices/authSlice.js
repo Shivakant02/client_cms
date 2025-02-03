@@ -10,7 +10,8 @@ const initialState={
 
 export const signup = createAsyncThunk("/auth/signup", async (data) => {
     try {
-      const response = axiosInstance.post("/user/login", data);
+      const response = axiosInstance.post("/user/signup", data);
+      console.log(response)
       toast.promise(response, {
         loading: "Wait! creating your account",
         success: (data) => {
@@ -20,7 +21,7 @@ export const signup = createAsyncThunk("/auth/signup", async (data) => {
       });
       return await response;
     } catch (error) {
-      //console.log(error);
+      console.log(error);
       toast.error(error?.response?.data?.message);
     }
   });
@@ -37,7 +38,7 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
       return await response;
     } catch (error) {
       //console.log(error);
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.message);
     }
   });
 
@@ -49,20 +50,12 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
         builder
         .addCase(signup.fulfilled,(state,action)=>{
             state.isLoggedIn=true;
-            state.role=action.payload.data.role;
-            state.currentUser=action.payload.data;
+            state.role=action.payload.data.user.role;
+            state.currentUser=action.payload.data.user;
             localStorage.setItem("isLoggedIn",true);
-            localStorage.setItem("role",action.payload.data.role);
-            localStorage.setItem("currentUser",JSON.stringify(action.payload.data));
-        })
-        .addCase(login.fulfilled,(state,action)=>{
-            state.isLoggedIn=true;
-            state.role=action.payload.data.role;
-            state.currentUser=action.payload.data;
-            localStorage.setItem("isLoggedIn",true);
-            localStorage.setItem("role",action.payload.data.role);
-            localStorage.setItem("currentUser",JSON.stringify(action.payload.data));
-        })
+            localStorage.setItem("role",action.payload.data.user.role);
+            localStorage.setItem("currentUser",JSON.stringify(action.payload.data.user));
+        });
     }
   })
 
