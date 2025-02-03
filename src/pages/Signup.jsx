@@ -19,6 +19,7 @@ function Signup() {
       <div className="w-full flex flex-col gap-2">
         <label className="font-semibold text-xs text-gray-400">Fullname</label>
         <input
+        type="text"
           placeholder="enter your fullname"
           className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
         />
