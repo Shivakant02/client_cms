@@ -15,7 +15,7 @@ const navigate=useNavigate();
         <div className="card-body">
           <h2 className="card-title text-2xl text-yellow-500">{type}</h2>
           <p>Coverage Amount: {coverageAmount}</p>
-          <p>Price: ${price}</p>
+          <p>Price: Rupees {price}</p>
           <div className="card-actions justify-end">
             <button onClick={()=>navigate("/purchasePolicy",{state:{type,coverageAmount,price,imageUrl}})} className="btn btn-primary">Buy Now</button>
           </div>
