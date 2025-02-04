@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom"
+
 function Home() {
   return (
-    <div className=" text-2xl text-red-600">
-        <h1>Home</h1>
+    <div className="flex justify-center items-center h-[calc(100vh-72px)]">
+        <button className="btn btn-accent btn-outline btn-lg"><Link to="/policies">See all the Policies</Link></button>
     </div>
   )
 }
