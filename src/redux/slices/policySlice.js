@@ -19,7 +19,7 @@ export const createPolicy = createAsyncThunk("/policy/createPolicy", async (data
       });
       return await response;
     } catch (error) {
-      toast.error(error?.response?.message);
+      toast.error(error?.response?.data?.message);
     }
   }
 )
@@ -37,7 +37,7 @@ export const myPolicies = createAsyncThunk("/policy/myPolicies", async () => {
         console.log(response)
       return await response;
     } catch (error) {
-      toast.error(error?.response?.message);
+      toast.error(error?.response?.data?.message);
     }
   }
 )

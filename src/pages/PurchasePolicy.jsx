@@ -13,7 +13,8 @@ function PurchasePolicy() {
     const data={
         type:state.type,
         coverage:state.coverageAmount,
-        premium:state.price
+        premium:state.price,
+        avatar:state.imageUrl
     }
 
 

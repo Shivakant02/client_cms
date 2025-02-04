@@ -7,6 +7,7 @@ function PolicyCard({data}) {
         <div className="card bg-gray-800 border-black border-solid border-2 w-96 shadow-xl shadow-black mx-2 my-1">
         <figure>
     <img
+    src={data.avatar}
       alt="image" 
       className="w-full h-60 object-cover"
       />
@@ -22,7 +23,7 @@ function PolicyCard({data}) {
             <li>Status: {data.status}</li>
           </ul>
           <div className="card-actions justify-end">
-            <button onClick={()=>navigate(`/${data._id}/claim`)} className=" w-full btn btn-primary">Claim</button>
+            <button onClick={()=>navigate(`/${data._id}/claim`,{state:data})} className=" w-full btn btn-primary">Claim</button>
           </div>
         </div>
       </div>

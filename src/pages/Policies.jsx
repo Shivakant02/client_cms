@@ -1,8 +1,4 @@
 import Card from "../components/Card"
-import carInsurance from "../assets/car insurance.jpg"
-import healthInsurance from "../assets/health insurance.jpg"
-import homeInsurance from "../assets/home_insuranace.jpg"
-
 
 function Policies() {
   return (
@@ -11,7 +7,7 @@ function Policies() {
   type="Health Insurance" 
   coverageAmount="500000" 
   price="499" 
-  imageUrl="https://help.ihealthagents.com/hc/article_attachments/360094168414/Health_Insurance.jpeg"
+  imageUrl="https://th.bing.com/th/id/OIP.-XEnYIXJQwduXqBwuQcPvgHaE8?rs=1&pid=ImgDetMain"
 />
       <Card
   type="Term Insurance" 
