@@ -7,6 +7,7 @@ import Login from "./pages/Login"
 import MyPolicies from "./pages/MyPolicies"
 import PurchasePolicy from "./pages/PurchasePolicy"
 import Policies from "./pages/Policies"
+import RequireAuth from "./pages/auth/Auth"
 
 function App() {
 
@@ -18,8 +19,14 @@ function App() {
       <Route path="/policies" element={<Policies/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/login" element={<Login/>} />
+
+      <Route element={<RequireAuth allowedRoles={["admin", "user"]}/>}>
       <Route path="/myPolicies" element={<MyPolicies/>} />
       <Route path="/purchasePolicy" element={<PurchasePolicy/>} />
+      </Route>
+
+      
+     
 
       <Route path="*" element={<NotFound/>} />
      </Routes>
