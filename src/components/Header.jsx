@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 function Header() {
 
   const {isLoggedIn, currentUser} = useSelector((state) => state.auth)
+  const navigate=useNavigate();
   function handleLogout() {
     localStorage.clear()
+    navigate("/")
     window.location.reload()
   }
   return (
@@ -17,14 +19,14 @@ function Header() {
       {isLoggedIn ? (
         <>
           <li>
-            <Link to="/user/myPolicies">
+            <Link to="/myPolicies">
               <button className=" btn btn-outline btn-info btn-sm rounded-md">
                My Policies
               </button>
             </Link>
           </li>
           <li>
-            <Link to="/user/myClaims">
+            <Link to="/myClaims">
               <button className=" btn btn-outline btn-info btn-sm rounded-md">
                 My Claims
               </button>
