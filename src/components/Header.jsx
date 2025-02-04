@@ -10,6 +10,8 @@ function Header() {
     navigate("/")
     window.location.reload()
   }
+
+  
   return (
     <nav className=" w-full h-[60px] bg-gray-950 text-white p-3 flex justify-between items-center">
     <Link to="/">
