@@ -1,15 +1,13 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { deleteClaim, getClaims } from "../redux/slices/claimSlice";
-
-
+import {useNavigate } from "react-router-dom";
 
 
 function MyClaim() {
   const { claims } = useSelector((state) => state.claim);
   const dispatch = useDispatch();
-
-
+  const navigate = useNavigate();
 
   async function handleDelete(id) {
     dispatch(deleteClaim(id));
@@ -22,12 +20,13 @@ function MyClaim() {
     <div className="overflow-x-auto">
   <table className="table">
     {/* head */}
-    <thead className=" bg-yellow-600 text-white">
+    <thead className=" w-full bg-yellow-600 text-white">
       <tr>
         <th>No.</th>
         <th>Type</th>
         <th>claim Amount</th>
         <th>Reason</th>
+        <th>Status</th>
         <th></th>
         <th></th>
       </tr>
@@ -38,9 +37,10 @@ function MyClaim() {
           <td>{index + 1}</td>
           <td>{claim.type}</td>
           <td>{claim.claimAmount}</td>
-          <td>{claim.claimReason}</td>
-          <td><button className=" btn btn-outline btn-primary btn-sm">update</button></td>
-          <td><button onClick={()=>handleDelete(claim._id)} className=" btn btn-outline btn-secondary btn-sm">delete</button></td>
+          <td className=" w-[500px]">{claim.claimReason}</td>
+          <td >{claim.status}</td>
+          <td><button onClick={()=>navigate(`/${claim._id}/updateClaim`,{state:claim})} className=" btn btn-outline btn-success btn-sm">update</button></td>
+          <td><button onClick={()=>handleDelete(claim._id)} className=" btn btn-outline btn-error btn-sm">delete</button></td>
         </tr>
       ))}
     </tbody>

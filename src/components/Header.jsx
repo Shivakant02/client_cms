@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 function Header() {
 
-  const {isLoggedIn, currentUser} = useSelector((state) => state.auth)
+  const {isLoggedIn, currentUser,role} = useSelector((state) => state.auth)
   const navigate=useNavigate();
   function handleLogout() {
     localStorage.clear()
@@ -20,6 +20,15 @@ function Header() {
     <ul className=" gap-2 flex flex-row items-center justify-center">
       {isLoggedIn ? (
         <>
+        {role==="admin" && (
+          <li>
+            <Link to="/dashboard">
+              <button className=" btn btn-outline btn-info btn-sm rounded-md">
+                Admin Dashboard
+              </button>
+            </Link>
+          </li>
+        )}
           <li>
             <Link to="/myPolicies">
               <button className=" btn btn-outline btn-info btn-sm rounded-md">
