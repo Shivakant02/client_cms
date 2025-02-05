@@ -42,6 +42,23 @@ export const getClaims = createAsyncThunk("/claim/getClaims", async () => {
   }
 )
 
+export const updateClaim = createAsyncThunk("/claim/updateClaim", async ({id,data}) => {
+    try {
+      const response = axiosInstance.put(`/claim/${id}`, data);
+      toast.promise(response, { 
+        loading: "Wait! updating your claim",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to update claim",
+      });
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+)
+
 export const deleteClaim = createAsyncThunk("/claim/deleteClaim", async (id) => {
     try {
       const response = axiosInstance.delete(`/claim/${id}`);
