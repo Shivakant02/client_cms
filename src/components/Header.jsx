@@ -29,6 +29,20 @@ function Header() {
             </Link>
           </li>
         )}
+        <li>
+            <Link to="/">
+              <button className=" btn btn-outline  btn-sm btn-primary rounded-md">
+              Home
+              </button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/policies">
+              <button className=" btn  btn-outline btn-sm btn-primary rounded-md">
+                Buy Policy
+              </button>
+            </Link>
+          </li>
           <li>
             <Link to="/myPolicies">
               <button className=" btn btn-outline btn-info btn-sm rounded-md">
@@ -63,6 +77,20 @@ function Header() {
         </>
       ) : (
         <>
+          <li>
+            <Link to="/policies">
+              <button className=" btn  btn-sm btn-primary rounded-md">
+                Buy Policy
+              </button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/">
+              <button className=" btn  btn-sm btn-primary rounded-md">
+                Home
+              </button>
+            </Link>
+          </li>
           <li>
             <Link to="/signup">
               <button className=" btn  btn-sm btn-primary rounded-md">
