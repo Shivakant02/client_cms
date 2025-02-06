@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL= "https://soft-glade-03b5.kants6397.workers.dev/api/v1"
+const baseURL= "https://claim-management-system-server.onrender.com/api/v1"
 
 const axiosInstance = axios.create()
 axiosInstance.defaults.baseURL = baseURL
