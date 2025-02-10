@@ -16,6 +16,7 @@ import PendingClaims from "./pages/admin/PendingClaims"
 import ApprovedClaims from "./pages/admin/ApprovedClaims"
 import RejectedClaims from "./pages/admin/RejectedClaims"
 import UpdateClaim from "./pages/UpdateClaim"
+import Profile from "./pages/Profile"
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
       <Route path="/myPolicies" element={<MyPolicies/>} />
       <Route path="/purchasePolicy" element={<PurchasePolicy/>} />
       <Route path="/:id/updateClaim" element={<UpdateClaim/>} />
+      <Route path="/profile" element={<Profile/>}/>
       </Route>
 
       <Route element={<RequireAuth allowedRoles={["admin"]}/>}>
