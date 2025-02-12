@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom"
-import { createPolicy } from "../redux/slices/policySlice";
+import { createPolicy, myPolicies } from "../redux/slices/policySlice";
 // import toast from "react-hot-toast";
 
 function PurchasePolicy() {
@@ -22,6 +22,7 @@ function PurchasePolicy() {
         e.preventDefault();
         const response=await dispatch(createPolicy(data));
         if(response.payload.data.success)
+          dispatch(myPolicies());
             navigate("/myPolicies");
         }
     

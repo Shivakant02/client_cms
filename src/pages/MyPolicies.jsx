@@ -9,8 +9,9 @@ function MyPolicies() {
     // console.log(policies)
 
     useEffect(()=>{
+      if(policies.length===0)
         dispatch(myPolicies())
-    },[])
+    },[dispatch,policies.length])
   return (
     <div className="">
        <ul className=" flex flex-wrap flex-row gap-3 ">

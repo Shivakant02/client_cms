@@ -16,6 +16,7 @@ function Signup() {
     gender: "",
   });
 
+
   function handleUserInput(e) {
     const { name, value } = e.target;
     setUserInput({
@@ -24,6 +25,7 @@ function Signup() {
     });
   }
 
+  
   // console.log(userInput)
 
   async function handleSubmit(e) {

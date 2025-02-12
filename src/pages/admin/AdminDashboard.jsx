@@ -6,7 +6,7 @@ function AdminDashboard() {
   const dispatch=useDispatch();
   useEffect(() => {
     dispatch(getAllClaims())
-  }, [])
+  }, [dispatch])
   return (
     <div className="w-full h-[80vh] flex flex-col justify-center items-center">
         <ul className=" flex flex-row gap-2">

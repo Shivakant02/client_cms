@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom"
-import { submitClaim } from "../redux/slices/claimSlice";
+import { getClaims, submitClaim } from "../redux/slices/claimSlice";
 
 function Claim() {
   const {state}=useLocation();
@@ -40,6 +40,7 @@ function Claim() {
 
     if (response.payload.data.success) {
       toast.success(response.payload.data.message);
+      dispatch(getClaims());
       navigate("/myClaims");
     }
   }

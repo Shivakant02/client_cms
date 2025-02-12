@@ -14,8 +14,9 @@ function MyClaim() {
       window.location.reload();
 }
   useEffect(() => {
+    if(claims.length===0)
     dispatch(getClaims());
-  }, []);
+  },[claims.length,dispatch]);
   return (
     <div className="overflow-x-auto">
   <table className="table">
