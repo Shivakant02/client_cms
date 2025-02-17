@@ -42,6 +42,40 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
     }
   });
 
+  //forget password
+  export const forgetPassword = createAsyncThunk("/auth/forgetPassword", async (data) => {
+    try {
+      const response = axiosInstance.post("/user/forgotPassword", data);
+      toast.promise(response, {
+        loading: "Wait! sending reset link",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to send reset link",
+      });
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  });
+
+  //reset password
+  export const resetPassword = createAsyncThunk("/auth/resetPassword", async ({resetToken,data}) => {
+    try {
+      const response = axiosInstance.post(`/user/resetPassword/${resetToken}`, data);
+      toast.promise(response, {
+        loading: "Wait! resetting password",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to reset password",
+      });
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  });
+
   export const authSlice = createSlice({
     name:"auth",
     initialState,

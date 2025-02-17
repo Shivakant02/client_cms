@@ -17,6 +17,8 @@ import ApprovedClaims from "./pages/admin/ApprovedClaims"
 import RejectedClaims from "./pages/admin/RejectedClaims"
 import UpdateClaim from "./pages/UpdateClaim"
 import Profile from "./pages/Profile"
+import ForgetPassword from "./pages/ForgetPassword"
+import ResetPassword from "./pages/ResetPassword"
 
 function App() {
 
@@ -28,6 +30,8 @@ function App() {
       <Route path="/policies" element={<Policies/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/login" element={<Login/>} />
+      <Route path="/forget-password" element={<ForgetPassword/>} />
+      <Route path="/reset-password" element={<ResetPassword/>} />
 
       <Route element={<RequireAuth allowedRoles={["admin", "user"]}/>}>
       <Route path="/:id/claim" element={<Claim/>} />

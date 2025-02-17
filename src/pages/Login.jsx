@@ -98,11 +98,16 @@ function Signup() {
             Login
           </button>
         </div>
-        <div className=" my-3 flex flex-row items-center justify-center">
+        <div className=" my-3 flex flex-col items-center justify-center">
           <p>
             Don{"'"}t have an account?{" "}
             <Link className=" text-blue-500 underline" to="/signup">
               Signup{" "}
+            </Link>
+          </p>
+          <p>
+            <Link className=" text-blue-500 underline" to="/forget-password">
+              Forget password
             </Link>
           </p>
         </div>
