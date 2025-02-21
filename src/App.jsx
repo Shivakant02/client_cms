@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
-import Header from "./components/Header"
 import Signup from "./pages/Signup"
 import NotFound from "./pages/NotFound"
 import Login from "./pages/Login"
@@ -19,13 +18,14 @@ import UpdateClaim from "./pages/UpdateClaim"
 import Profile from "./pages/Profile"
 import ForgetPassword from "./pages/ForgetPassword"
 import ResetPassword from "./pages/ResetPassword"
+import HomeLayout from "./layout/HomeLayout"
 
 function App() {
 
   return (
     <>
-    <Header/>
      <Routes>
+      <Route element={<HomeLayout/>}>
       <Route path="/" element={<Home/>} />
       <Route path="/policies" element={<Policies/>} />
       <Route path="/signup" element={<Signup/>} />
@@ -48,11 +48,12 @@ function App() {
         <Route path="/approvedClaims" element={<ApprovedClaims/>} />
         <Route path="/rejectedClaims" element={<RejectedClaims/>} />
       </Route>
-
+    
       
      
       <Route path="/denied" element={<Forbidden/>} />
       <Route path="*" element={<NotFound/>} />
+      </Route>
      </Routes>
     </>
   )
