@@ -58,6 +58,23 @@ export const rejectClaim = createAsyncThunk("/claim/rejectClaim", async (id) => 
   }
 )
 
+export const approveMultipleClaims = createAsyncThunk("/claim/approveMultipleClaims", async (claimIds) => {
+    try {
+      const response = axiosInstance.post(`/admin/approve-multiple`,{claimIds});
+      toast.promise(response, { 
+        loading: "Wait! approving claims",
+        success: (data) => {
+          return data?.data?.message;
+        },
+        error: "Failed to approve claims",
+      });
+      return await response;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+)
+
 const adminSlice = createSlice({
     name: "admin",
     initialState,
