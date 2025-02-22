@@ -46,7 +46,7 @@ function Home() {
   
   
   return (
-    <div className="w-full mt-15 ">
+    <div className="min-h-screen py-15 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">
       {/* Hero Section */}
       <div className="relative w-full h-[85vh] bg-gradient-to-r from-purple-600 to-pink-500 flex flex-col justify-center items-center text-white text-center px-6">
         <motion.h1 
@@ -171,65 +171,65 @@ function Home() {
       </Swiper>
     </div>
 
-      <div
-      className="relative mt-16 px-6 md:px-20 py-16 text-center overflow-hidden"
-    >
-      {/* Blurry Gradient Background */}
-      <div
-        className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 blur-2xl opacity-50"
-      />
+    <div className="relative mt-16 px-6 md:px-20 py-16 text-center overflow-hidden">
+  {/* Blurry Glass Gradient Background */}
+  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 blur-3xl opacity-50" />
 
-      {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        {/* Left Side - Text & Features */}
-        <div className={`text-left ${theme=="light"?"text-gray-900":"text-white"}`}>
-          <h2 className="text-4xl font-bold mb-4 ">
-            Get the U-Insure App
-          </h2>
-          <p className="text-lg mb-6">
-            Take control of all your insurance needs, anywhere, anytime.
-          </p>
+  {/* Glassmorphism Container */}
+  <div className="relative backdrop-blur-lg bg-white/20 dark:bg-white/10 rounded-2xl p-10 md:p-14 shadow-lg border border-white/30 dark:border-white/10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      {/* Left Side - Text & Features */}
+      <div className={`text-left ${theme === "light" ? "text-gray-900" : "text-white"}`}>
+        <h2 className="text-4xl font-bold mb-4">
+          Get the <span className="text-indigo-600 dark:text-indigo-400">U-Insure</span> App
+        </h2>
+        <p className="text-lg mb-6">
+          Take control of all your insurance needs, anywhere, anytime.
+        </p>
 
-          <ul className="space-y-3  ">
-            <li className="flex items-center">
-              ⭐ Compare different insurance policies
-            </li>
-            <li className="flex items-center">
-              ⭐ Buy, store, and share all your policies online
-            </li>
-            <li className="flex items-center">
-              ⭐ Track your policy status on the go
-            </li>
-            <li className="flex items-center">
-              ⭐ Download your policy with a single tap
-            </li>
-          </ul>
+        <ul className="space-y-4 text-lg">
+          <li className="flex items-center">
+            ✅ Compare different insurance policies
+          </li>
+          <li className="flex items-center">
+            ✅ Buy, store, and share all your policies online
+          </li>
+          <li className="flex items-center">
+            ✅ Track your policy status on the go
+          </li>
+          <li className="flex items-center">
+            ✅ Download your policy with a single tap
+          </li>
+        </ul>
 
-          {/* App Store Buttons */}
-          <div className="mt-6 flex space-x-4">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-              alt="Google Play"
-              className="w-34 h-10 cursor-pointer"
-            />
-            <img
-              src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us"
-              alt="App Store"
-              className="w-36 h-10 cursor-pointer"
-            />
-          </div>
-        </div>
-
-        {/* Right Side - App Preview */}
-        <div className="flex justify-center">
+        {/* App Store Buttons */}
+        <div className="mt-8 flex space-x-4">
           <img
-            src="https://img.freepik.com/free-vector/ui-app-design-mobile-phone-banner_80328-88.jpg?ga=GA1.1.1472066286.1739380995&semt=ais_hybrid"
-            alt="U-Insure App Preview"
-            className="w-[300px] md:w-[400px] rounded-lg shadow-xl"
+            src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+            alt="Google Play"
+            className="w-36 h-12 transition-transform transform hover:scale-105 cursor-pointer"
+          />
+          <img
+            src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us"
+            alt="App Store"
+            className="w-36 h-12 transition-transform transform hover:scale-105 cursor-pointer"
           />
         </div>
       </div>
+
+      {/* Right Side - App Preview */}
+      <div className="flex justify-center">
+        <img
+          src="https://img.freepik.com/free-vector/ui-app-design-mobile-phone-banner_80328-88.jpg?ga=GA1.1.1472066286.1739380995&semt=ais_hybrid"
+          alt="U-Insure App Preview"
+          className="w-[320px] md:w-[420px] rounded-xl shadow-2xl"
+        />
+      </div>
     </div>
+  </div>
+</div>
+
+  
 
       {/* Footer CTA */}
       <div className="mt-16 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-center py-10">

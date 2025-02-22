@@ -20,6 +20,7 @@ import ForgetPassword from "./pages/ForgetPassword"
 import ResetPassword from "./pages/ResetPassword"
 import HomeLayout from "./layout/HomeLayout"
 import ScrollToTop from "./pages/ScrollToTop"
+import AboutUs from "./pages/AboutUs"
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
       <Route path="/login" element={<Login/>} />
       <Route path="/forget-password" element={<ForgetPassword/>} />
       <Route path="/reset-password" element={<ResetPassword/>} />
+      <Route path="/about" element={<AboutUs/>} />
 
       <Route element={<RequireAuth allowedRoles={["admin", "user"]}/>}>
       <Route path="/:id/claim" element={<Claim/>} />

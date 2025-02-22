@@ -13,7 +13,7 @@ const CardHome = ({ title, description, image }) => {
                   border border-dashed backdrop-blur-lg hover:scale-105 hover:shadow-2xl
                   ${
                     theme === "dark"
-                      ? "bg-black/20 border-gray-600"
+                      ? "bg-gray-900/30 border-gray-600"
                       : "bg-white/20 border-gray-300"
                   }`}
     >

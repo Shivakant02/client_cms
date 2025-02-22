@@ -1,28 +1,28 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { myPolicies } from "../redux/slices/policySlice";
 import PolicyCard from "../components/PolicyCard";
 
 function MyPolicies() {
-    const dispatch = useDispatch();
-    const {policies}=useSelector((state)=>state.policy)
-    // console.log(policies)
+  const dispatch = useDispatch();
+  const { policies } = useSelector((state) => state.policy);
 
-    useEffect(()=>{
-      if(policies.length===0)
-        dispatch(myPolicies())
-    },[dispatch,policies.length])
+  useEffect(() => {
+    if (policies.length === 0) dispatch(myPolicies());
+  }, [dispatch, policies.length]);
+
   return (
-    <div className="">
-       <ul className=" flex flex-wrap flex-row gap-3 ">
-              {policies.map((policy)=>(
-                <li key={policy._id}>
-                     <PolicyCard data={policy}/>
-                </li>
-              ))}
-       </ul>
+    <div className="min-h-screen py-15
+      bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-black">
+      <ul className="flex flex-wrap gap-3 flex-row">
+        {policies.map((policy) => (
+          <li key={policy._id}>
+            <PolicyCard data={policy} />
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
 
-export default MyPolicies
+export default MyPolicies;

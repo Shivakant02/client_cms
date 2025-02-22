@@ -20,7 +20,7 @@ function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 backdrop-blur-lg shadow-md px-6 py-3 flex justify-between items-center 
-        dark:bg-black/30 dark:text-white bg-white/30 text-gray-900
+        dark:bg-black/20 dark:text-white bg-white/20 text-gray-900
       `}
     >
       {/* Left - Logo */}

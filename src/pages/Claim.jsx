@@ -1,17 +1,19 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom";
 import { getClaims, submitClaim } from "../redux/slices/claimSlice";
+import { myPolicies } from "../redux/slices/policySlice";
 
 function Claim() {
-  const {state}=useLocation();
-  const dispatch=useDispatch()
-  const navigate=useNavigate();
-  const [userInput,setUserInput]=useState({
-    claimAmount:"",
-    claimReason:""
-  })
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [userInput, setUserInput] = useState({
+    claimAmount: "",
+    claimReason: "",
+  });
 
   function handleUserInput(e) {
     const { name, value } = e.target;
@@ -21,138 +23,126 @@ function Claim() {
     });
   }
 
-  // console.log(userInput)
-
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!userInput.claimAmount || !userInput.claimAmount) {
+    if (!userInput.claimAmount || !userInput.claimReason) {
       toast.error("Please fill all the fields");
       return;
     }
-    if (userInput.claimAmount>state.coverage) {
-      toast.error("claim amount should be less than coverage");
+
+    if (userInput.claimAmount > state.coverage) {
+      toast.error("Claim amount should be less than coverage");
       return;
     }
 
-    const response = await dispatch(submitClaim({id:state._id,data:userInput}));
-    console.log(response)
+    const response = await dispatch(submitClaim({ id: state._id, data: userInput }));
 
-    if (response.payload.data.success) {
+    if (response.payload?.data?.success) {
       toast.success(response.payload.data.message);
       dispatch(getClaims());
+      dispatch(myPolicies());
+
       navigate("/myClaims");
+    } else {
+      toast.error("Failed to submit claim.");
     }
   }
+
   return (
-    <div className=" flex items-center justify-center">
-      <div className="min-h-96 px-8 py-6 mt-4 text-left bg-white dark:bg-gray-900 rounded-xl shadow-lg">
-        <div className="flex flex-col justify-center items-center h-full gap-1 select-none">
-          <div className="flex flex-col items-center justify-center gap-2 mb-8">
-            <p className="m-0 text-[16px] font-semibold dark:text-white">
-              Enter the required details
-            </p>
-            <span className="m-0 text-xs w-96 text-center text-[#8B8E98]">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-            </span>
-          </div>
-          <div className="w-full flex flex-col gap-1">
-            <label
-              htmlFor="type"
-              className="font-semibold text-xs text-gray-400"
-            >
-              Type
-            </label>
+    <div className="min-h-screen py-16 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black flex items-center justify-center">
+      <div className="w-full max-w-lg px-8 py-6 bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg rounded-xl shadow-lg border border-white/20 dark:border-gray-700">
+        
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Enter the Required Details</h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Please provide accurate details to process your claim request efficiently.
+          </p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          
+          {/* Claim Type (Disabled) */}
+          <div>
+            <label className="text-xs font-semibold text-gray-500 dark:text-gray-400">Type</label>
             <input
-              required
-              disabled
               name="type"
               value={state.type}
-              id="type"
-              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
+              disabled
+              className="w-full border rounded-lg px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700/50 dark:text-white"
             />
           </div>
-          <div className="w-full flex flex-col gap-2">
-            <label
-              htmlFor="claimAmount"
-              className="font-semibold text-xs text-gray-400"
-            >
-              Claim Amount
-            </label>
-            <input
-              required
-              min="0"
-              name="claimAmount"
-              id="claimAmount"
-              onChange={handleUserInput}
-              value={userInput.claimAmount}
-              type="number"
-              className=" text-white border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
-            />
-          </div>
-        </div>
-        <div className="w-full flex flex-col gap-2">
-          <label
-            htmlFor="claimReason"
-            className="font-semibold text-xs text-gray-400"
-          >
-            Claim reason
-          </label>
-          <textarea
-            required
-            value={userInput.claimReason}
-            onChange={handleUserInput}
-            name="claimReason"
-            id="claimReason"
-            type="text"
-            className=" min-h-[60px] border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-          />
-        </div>
-        <div className=" w-full flex flex-row justify-between gap-1">
-        <div className="w-1/2 flex flex-col gap-1">
-          <label
-           className="font-semibold text-xs text-gray-400"
-          htmlFor="coverage">
-            Max Coverage
-            </label>
-          <input
-          name="coverage"
-          id="coverage"
-          disabled
-          value={state.coverage}
-          className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-           type="number" />
-        </div>
-        <div className="w-1/2 flex flex-col gap-1">
-  <label 
-  className="font-semibold text-xs text-gray-400"
-  htmlFor="start-date">
-    Claim date
-    </label>
-  <input
-  name="start-dat"
-    id="start-date"
-    value={new Date().toISOString().slice(0, 10)}
-    type="date"
-    className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-  />
-    
-</div>
 
-        </div>
-        
-        <div>
+          {/* Claim Amount */}
+          <div>
+            <label className="text-xs font-semibold text-gray-500 dark:text-gray-400">Claim Amount</label>
+            <input
+              name="claimAmount"
+              type="number"
+              min="0"
+              required
+              value={userInput.claimAmount}
+              onChange={handleUserInput}
+              className="w-full border rounded-lg px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700/50 dark:text-white"
+            />
+          </div>
+
+          {/* Claim Reason */}
+          <div>
+            <label className="text-xs font-semibold text-gray-500 dark:text-gray-400">Claim Reason</label>
+            <textarea
+              name="claimReason"
+              required
+              value={userInput.claimReason}
+              onChange={handleUserInput}
+              className="w-full border rounded-lg px-3 py-2 text-sm min-h-[60px] bg-gray-100 dark:bg-gray-700/50 dark:text-white"
+            />
+          </div>
+
+          {/* Two-Column Section (Max Coverage & Date) */}
+          <div className="grid grid-cols-2 gap-4">
+            
+            {/* Max Coverage (Disabled) */}
+            <div>
+              <label className="text-xs font-semibold text-gray-500 dark:text-gray-400">Max Coverage</label>
+              <input
+                name="coverage"
+                type="number"
+                disabled
+                value={state.coverage}
+                className="w-full border rounded-lg px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700/50 dark:text-white"
+              />
+            </div>
+
+            {/* Claim Date (Disabled) */}
+            <div>
+              <label className="text-xs font-semibold text-gray-500 dark:text-gray-400">Claim Date</label>
+              <input
+                name="start-date"
+                type="date"
+                value={new Date().toISOString().slice(0, 10)}
+                disabled
+                className="w-full border rounded-lg px-3 py-2 text-sm bg-gray-100 dark:bg-gray-700/50 dark:text-white"
+              />
+            </div>
+
+          </div>
+
+          {/* Submit Button */}
           <button
-          onClick={handleSubmit}
-            className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
+            type="submit"
+            className="w-full py-2 text-white bg-blue-500 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Submit Claim
           </button>
-        </div>
+
+        </form>
+
       </div>
     </div>
-
-  )
+  );
 }
 
-export default Claim
+export default Claim;
