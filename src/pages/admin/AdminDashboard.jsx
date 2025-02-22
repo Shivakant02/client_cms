@@ -7,12 +7,16 @@ function AdminDashboard() {
   const dispatch = useDispatch();
   
   // Select claims from Redux state
-  const claims = useSelector((state) => state?.admin?.allClaims); 
+  const {allClaims} = useSelector((state) => state?.admin); 
 
   useEffect(() => {
-    if (!claims || claims.length===0)
+    if (
+      allClaims &&
+      Object.keys(allClaims).length > 0 && // Ensure allClaims is not an empty object
+      Object.values(allClaims).every((arr) => Array.isArray(arr) && arr.length === 0) // Check if all arrays are empty
+    )
       dispatch(getAllClaims()); // Fetch only if no claims exist
-  }, [dispatch]);
+  }, [allClaims, dispatch]);
 
   return (
     <div className="w-full h-[80vh] flex flex-col justify-center items-center">

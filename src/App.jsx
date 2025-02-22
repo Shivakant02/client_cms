@@ -19,11 +19,13 @@ import Profile from "./pages/Profile"
 import ForgetPassword from "./pages/ForgetPassword"
 import ResetPassword from "./pages/ResetPassword"
 import HomeLayout from "./layout/HomeLayout"
+import ScrollToTop from "./pages/ScrollToTop"
 
 function App() {
 
   return (
     <>
+      <ScrollToTop/>
      <Routes>
       <Route element={<HomeLayout/>}>
       <Route path="/" element={<Home/>} />

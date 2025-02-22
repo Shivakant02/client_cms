@@ -1,11 +1,10 @@
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../redux/slices/authSlice";
 import { useState } from "react";
 
 function Signup() {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState({
@@ -16,7 +15,6 @@ function Signup() {
     gender: "",
   });
 
-
   function handleUserInput(e) {
     const { name, value } = e.target;
     setUserInput({
@@ -24,9 +22,6 @@ function Signup() {
       [name]: value,
     });
   }
-
-  
-  // console.log(userInput)
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -37,33 +32,33 @@ function Signup() {
     }
 
     const response = await dispatch(signup(userInput));
-    console.log(response)
+    console.log(response);
 
     if (response.payload.data.success) {
-      // toast.success(response.payload.data.message);
       navigate("/");
     }
   }
-    
+
   return (
-    
-    <div className=" flex items-center justify-center">
-      <div className="min-h-96 px-8 py-6 mt-4 text-left bg-white dark:bg-gray-900 rounded-xl shadow-lg">
+    <div className="flex items-center justify-center min-h-screen mt-15 relative">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
+
+      {/* Signup Card */}
+      <div className="relative px-8 py-6 text-left rounded-xl shadow-lg backdrop-blur-lg bg-white/30 dark:bg-gray-900/30 border border-gray-700/20 dark:border-gray-300/30">
         <div className="flex flex-col justify-center items-center h-full select-none">
           <div className="flex flex-col items-center justify-center gap-2 mb-8">
-            <p className="m-0 text-[16px] font-semibold dark:text-white">
+            <p className="text-lg font-semibold dark:text-white">
               Signup to a new account
             </p>
-            <span className="m-0 text-xs min-w-[90%] text-center text-[#8B8E98]">
-              Get started with our app, just start section and enjoy
-              experience.
+            <span className="text-xs min-w-[90%] text-center text-gray-500 dark:text-gray-400">
+              Get started with our app, just sign up and enjoy the experience.
             </span>
           </div>
+
+          {/* Fullname */}
           <div className="w-full flex flex-col gap-1">
-            <label
-              htmlFor="fullname"
-              className="font-semibold text-xs text-gray-400"
-            >
+            <label htmlFor="fullname" className="text-xs text-gray-500 dark:text-gray-400">
               Fullname
             </label>
             <input
@@ -73,14 +68,13 @@ function Signup() {
               value={userInput.fullname}
               id="fullname"
               placeholder="Fullname"
-              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
+              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none bg-white/60 dark:bg-gray-800/60 text-gray-900 dark:text-white"
             />
           </div>
+
+          {/* Email */}
           <div className="w-full flex flex-col gap-2">
-            <label
-              htmlFor="email"
-              className="font-semibold text-xs text-gray-400"
-            >
+            <label htmlFor="email" className="text-xs text-gray-500 dark:text-gray-400">
               Email
             </label>
             <input
@@ -90,86 +84,84 @@ function Signup() {
               name="email"
               id="email"
               placeholder="abc@example.com"
-              className=" text-white border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
+              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none bg-white/60 dark:bg-gray-800/60 text-gray-900 dark:text-white"
             />
           </div>
-        </div>
-        <div className="w-full flex flex-col gap-2">
-          <label
-            htmlFor="password"
-            className="font-semibold text-xs text-gray-400"
-          >
-            Password
-          </label>
-          <input
-            required
-            value={userInput.password}
-            onChange={handleUserInput}
-            name="password"
-            id="password"
-            placeholder="••••••••"
-            className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-            type="password"
-          />
-        </div>
-        <div className=" w-full flex flex-row justify-between gap-1">
-        <div className="w-1/2 flex flex-col gap-1">
-          <label
-           className="font-semibold text-xs text-gray-400"
-          htmlFor="dateOfBirth">
-            DOB
-            </label>
-          <input
-          onChange={handleUserInput}
-          value={userInput.dateOfBirth}
-          name="dateOfBirth"
-          id="dateOfBirth"
-          className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-           type="date" />
-        </div>
-        <div className="w-1/2 flex flex-col gap-1">
-  <label 
-  className="font-semibold text-xs text-gray-400"
-  htmlFor="gender">
-    Gender
-    </label>
-  <select
-  onChange={handleUserInput}
-  value={userInput.gender}
-  name="gender"
-    id="gender"
-    className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-  >
-    <option value="">Select Gender</option>
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-    <option value="other">Other</option>
-  </select>
-</div>
 
-        </div>
-        
-        <div>
-          <button
-            onClick={handleSubmit}
-            className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
-          >
-            Signup
-          </button>
-        </div>
-        <div className=" my-3 flex flex-row items-center justify-center">
-          <p>
-            Already have an account?{" "}
-            <Link className=" text-blue-500 underline" to="/login">
-              Login{" "}
-            </Link>
-          </p>
+          {/* Password */}
+          <div className="w-full flex flex-col gap-2">
+            <label htmlFor="password" className="text-xs text-gray-500 dark:text-gray-400">
+              Password
+            </label>
+            <input
+              required
+              value={userInput.password}
+              onChange={handleUserInput}
+              name="password"
+              id="password"
+              placeholder="••••••••"
+              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none bg-white/60 dark:bg-gray-800/60 text-gray-900 dark:text-white"
+              type="password"
+            />
+          </div>
+
+          {/* DOB & Gender */}
+          <div className="w-full flex flex-row justify-between gap-2">
+            <div className="w-1/2 flex flex-col gap-1">
+              <label htmlFor="dateOfBirth" className="text-xs text-gray-500 dark:text-gray-400">
+                Date of Birth
+              </label>
+              <input
+                onChange={handleUserInput}
+                value={userInput.dateOfBirth}
+                name="dateOfBirth"
+                id="dateOfBirth"
+                className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none bg-white/60 dark:bg-gray-800/60 text-gray-900 dark:text-white"
+                type="date"
+              />
+            </div>
+            <div className="w-1/2 flex flex-col gap-1">
+              <label htmlFor="gender" className="text-xs text-gray-500 dark:text-gray-400">
+                Gender
+              </label>
+              <select
+                onChange={handleUserInput}
+                value={userInput.gender}
+                name="gender"
+                id="gender"
+                className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none bg-white/60 dark:bg-gray-800/60 text-gray-900 dark:text-white"
+              >
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Signup Button */}
+          <div className="w-full">
+            <button
+              onClick={handleSubmit}
+              className="py-2 px-8 bg-blue-500 hover:bg-blue-700 transition duration-300 text-white w-full rounded-lg shadow-md focus:outline-none"
+            >
+              Signup
+            </button>
+          </div>
+
+          {/* Already have an account? */}
+          <div className="mt-3 text-sm">
+            <p className="text-gray-500 dark:text-gray-400">
+              Already have an account?{" "}
+              <Link className="text-blue-500 hover:underline" to="/login">
+                Login
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-
   );
-
 }
 
-export default Signup
+export default Signup;

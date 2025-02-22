@@ -46,7 +46,7 @@ function Home() {
   
   
   return (
-    <div className="w-full mt-16 ">
+    <div className="w-full mt-15 ">
       {/* Hero Section */}
       <div className="relative w-full h-[85vh] bg-gradient-to-r from-purple-600 to-pink-500 flex flex-col justify-center items-center text-white text-center px-6">
         <motion.h1 
