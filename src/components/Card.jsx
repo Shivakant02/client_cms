@@ -6,7 +6,7 @@ function PolicyCard({ type, coverageAmount, price, imageUrl }) {
   return (
     <div
       className="relative w-96 p-5 rounded-xl shadow-lg border transition-transform transform hover:scale-105 hover:shadow-2xl mx-2 my-3 
-      bg-white/10 dark:bg-gray-900/30 backdrop-blur-lg border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white"
+      bg-white/10 dark:bg-gray-900/30 backdrop-blur-lg border-gray-400 dark:border-gray-700 text-gray-900 dark:text-white"
     >
       {/* Policy Image */}
       <figure className="overflow-hidden rounded-t-xl">

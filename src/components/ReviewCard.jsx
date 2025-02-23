@@ -2,7 +2,7 @@ import { FaStar } from "react-icons/fa";
 const ReviewCard = ({ review, name, rating }) => {
     
     return (
-      <div  className="p-6 shadow-xl rounded-2xl backdrop-blur-md border border-gray-300 bg-white/20 dark:bg-gray-600/20 text-center ">
+      <div  className="p-6 shadow-xl rounded-2xl backdrop-blur-md border border-gray-400 bg-white/20 dark:bg-gray-600/20 text-center ">
         <div className="flex justify-center mb-2">
           {[...Array(5)].map((_, i) => (
             <FaStar key={i} className={`text-lg ${i < rating ? "text-yellow-500" : "text-gray-300"}`} />

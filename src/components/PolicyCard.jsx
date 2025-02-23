@@ -20,6 +20,9 @@ function PolicyCard({ data }) {
           <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
             <span className="font-medium">ID:</span> <span>{data._id}</span>
           </div>
+          <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
+            <span className="font-medium">Policy Holder:</span> <span>{data.name}</span>
+          </div>
 
           <div className="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
             <span className="font-medium">Coverage:</span> <span>{data.coverage}</span>

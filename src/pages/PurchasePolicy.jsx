@@ -40,10 +40,9 @@ function PurchasePolicy() {
   }, []);
 
   return (
-    <div className="min-h-screen py-15
-    bg-gradient-to-br from-blue-100 light:via-purple-100 to-white dark:from-gray-900 dark:to-black">
+    <div className="min-h-screen py-16 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black flex items-center justify-center">
     <div className="flex items-center justify-center min-h-screen p-6">
-      <div className="w-full max-w-lg p-6 rounded-2xl shadow-lg bg-white/10 dark:bg-gray-900/30 backdrop-blur-lg border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">
+      <div className="w-full max-w-lg p-6 rounded-2xl shadow-lg bg-white/10 dark:bg-gray-900/30 backdrop-blur-lg border border-gray-400 dark:border-gray-700 text-gray-900 dark:text-white">
         {/* Header */}
         <div className="text-center mb-6">
           <h2 className="text-xl font-semibold">Review the Policy Details</h2>

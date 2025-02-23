@@ -1,17 +1,17 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom"
-import { updateClaim } from "../redux/slices/claimSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getClaims, updateClaim } from "../redux/slices/claimSlice";
 
 function UpdateClaim() {
-  const {state}=useLocation();
-  const dispatch=useDispatch()
-  const navigate=useNavigate();
-  const [userInput,setUserInput]=useState({
-    claimAmount:"",
-    claimReason:""
-  })
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [userInput, setUserInput] = useState({
+    claimAmount: "",
+    claimReason: "",
+  });
 
   function handleUserInput(e) {
     const { name, value } = e.target;
@@ -21,99 +21,80 @@ function UpdateClaim() {
     });
   }
 
-  // console.log(userInput)
-
   async function handleSubmit(e) {
     e.preventDefault();
-    if (userInput.claimAmount>state.coverage) {
-      toast.error("claim amount should be less than coverage");
+    if (userInput.claimAmount > state.coverage) {
+      toast.error("Claim amount should be less than coverage");
       return;
     }
 
-    const response = await dispatch(updateClaim({id:state._id,data:userInput}));
-    // console.log(response)
+    const response = await dispatch(updateClaim({ id: state._id, data: userInput }));
 
     if (response.payload.data.success) {
       toast.success(response.payload.data.message);
+      dispatch(getClaims());
       navigate("/myClaims");
     }
   }
+
   return (
-    <div className=" flex items-center justify-center">
-      <div className="min-h-96 px-8 py-6 mt-4 text-left bg-white dark:bg-gray-900 rounded-xl shadow-lg">
-        <div className="flex flex-col justify-center items-center h-full gap-1 select-none">
-          <div className="flex flex-col items-center justify-center gap-2 mb-8">
-            <p className="m-0 text-[16px] font-semibold dark:text-white">
-              Enter the updated details
-            </p>
-            <span className="m-0 text-xs w-96 text-center text-[#8B8E98]">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-            </span>
-          </div>
-          <div className="w-full flex flex-col gap-1">
-            <label
-              htmlFor="type"
-              className="font-semibold text-xs text-gray-400"
-            >
-              Type
-            </label>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+      <div className="w-full max-w-lg p-8 backdrop-blur-lg bg-white/30 dark:bg-gray-900/30 border border-gray-900/30 dark:border-white/30 shadow-2xl rounded-2xl">
+        {/* Title */}
+        <div className="text-center mb-6">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">Update Your Claim</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Modify your claim details below</p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Claim Type (Disabled) */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-300">Type</label>
             <input
-              required
               disabled
-              name="type"
               value={state.type}
-              id="type"
-              className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white outline-none"
             />
           </div>
-          <div className="w-full flex flex-col gap-2">
-            <label
-              htmlFor="claimAmount"
-              className="font-semibold text-xs text-gray-400"
-            >
-              Claim Amount
-            </label>
+
+          {/* Claim Amount */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-300">Claim Amount</label>
             <input
               required
+              type="number"
               min="0"
               name="claimAmount"
-              id="claimAmount"
-              onChange={handleUserInput}
               value={userInput.claimAmount}
-              type="number"
-              className=" text-white border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
+              onChange={handleUserInput}
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white outline-none"
             />
           </div>
-        </div>
-        <div className="w-full flex flex-col gap-2">
-          <label
-            htmlFor="claimReason"
-            className="font-semibold text-xs text-gray-400"
-          >
-            Claim reason
-          </label>
-          <textarea
-            required
-            value={userInput.claimReason}
-            onChange={handleUserInput}
-            name="claimReason"
-            id="claimReason"
-            type="text"
-            className=" min-h-[60px] border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-          />
-        </div> 
-        <div>
+
+          {/* Claim Reason */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-600 dark:text-gray-300">Claim Reason</label>
+            <textarea
+              required
+              name="claimReason"
+              value={userInput.claimReason}
+              onChange={handleUserInput}
+              className="w-full px-4 py-2 min-h-[60px] rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-white outline-none resize-none"
+            />
+          </div>
+
+          {/* Submit Button */}
           <button
-          onClick={handleSubmit}
-            className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
+            type="submit"
+            className="w-full py-2 bg-blue-600 hover:bg-blue-800 text-white font-semibold rounded-lg transition-all"
           >
             Submit Claim
           </button>
-        </div>
+        </form>
       </div>
     </div>
-
-  )
+  );
 }
 
-export default UpdateClaim
+export default UpdateClaim;

@@ -2,8 +2,7 @@ import Card from "../components/Card"
 
 function Policies() {
   return (
-   <div className="min-h-screen py-15
-   bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-black">
+   <div className="min-h-screen py-16 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">
      <div className=" mt-4 flex flex-wrap gap-2 justify-around">
       <Card
   type="Health Insurance" 

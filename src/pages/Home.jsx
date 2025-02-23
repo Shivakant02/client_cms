@@ -131,7 +131,7 @@ function Home() {
         <div
           className={`p-6 shadow-lg rounded-lg backdrop-blur-lg border border-dashed transition-transform duration-300 
                       hover:scale-105 hover:shadow-2xl 
-                      ${theme === "dark" ? "bg-black/30 border-gray-600" : "border-gray-300 bg-white/30"}`}
+                      ${theme === "dark" ? "bg-black/30 border-gray-600" : "border-gray-400 bg-white/30"}`}
           style={{
             background: theme === "dark"
               ? "linear-gradient(135deg, rgba(255, 146, 47, 0.2), rgba(255, 200, 100, 0.2))"

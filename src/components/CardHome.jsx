@@ -14,7 +14,7 @@ const CardHome = ({ title, description, image }) => {
                   ${
                     theme === "dark"
                       ? "bg-gray-900/30 border-gray-600"
-                      : "bg-white/20 border-gray-300"
+                      : "bg-white/20 border-gray-400"
                   }`}
     >
       {/* Image with Hover Effect */}
