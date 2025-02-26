@@ -2,7 +2,8 @@ import Card from "../components/Card"
 
 function Policies() {
   return (
-    <div className=" mt-4 flex flex-wrap gap-2 justify-around">
+   <div className="min-h-screen py-16 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+     <div className=" mt-4 flex flex-wrap gap-2 justify-around">
       <Card
   type="Health Insurance" 
   coverageAmount="500000" 
@@ -39,6 +40,7 @@ function Policies() {
   imageUrl="https://th.bing.com/th/id/OIP._485EaS3o0uzGliR-q1sEgHaEK?rs=1&pid=ImgDetMain"
 />
     </div>
+   </div>
   );
 }
 

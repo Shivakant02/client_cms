@@ -34,7 +34,7 @@ export const myPolicies = createAsyncThunk("/policy/myPolicies", async () => {
             },
             error: "Failed to fetch policies",
         });
-        console.log(response)
+        // console.log(response)
       return await response;
     } catch (error) {
       toast.error(error?.response?.data?.message);

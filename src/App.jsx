@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
-import Header from "./components/Header"
 import Signup from "./pages/Signup"
 import NotFound from "./pages/NotFound"
 import Login from "./pages/Login"
@@ -16,17 +15,27 @@ import PendingClaims from "./pages/admin/PendingClaims"
 import ApprovedClaims from "./pages/admin/ApprovedClaims"
 import RejectedClaims from "./pages/admin/RejectedClaims"
 import UpdateClaim from "./pages/UpdateClaim"
+import Profile from "./pages/Profile"
+import ForgetPassword from "./pages/ForgetPassword"
+import ResetPassword from "./pages/ResetPassword"
+import HomeLayout from "./layout/HomeLayout"
+import ScrollToTop from "./pages/ScrollToTop"
+import AboutUs from "./pages/AboutUs"
 
 function App() {
 
   return (
     <>
-    <Header/>
+      <ScrollToTop/>
      <Routes>
+      <Route element={<HomeLayout/>}>
       <Route path="/" element={<Home/>} />
       <Route path="/policies" element={<Policies/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/login" element={<Login/>} />
+      <Route path="/forget-password" element={<ForgetPassword/>} />
+      <Route path="/reset-password" element={<ResetPassword/>} />
+      <Route path="/about" element={<AboutUs/>} />
 
       <Route element={<RequireAuth allowedRoles={["admin", "user"]}/>}>
       <Route path="/:id/claim" element={<Claim/>} />
@@ -34,6 +43,7 @@ function App() {
       <Route path="/myPolicies" element={<MyPolicies/>} />
       <Route path="/purchasePolicy" element={<PurchasePolicy/>} />
       <Route path="/:id/updateClaim" element={<UpdateClaim/>} />
+      <Route path="/profile" element={<Profile/>}/>
       </Route>
 
       <Route element={<RequireAuth allowedRoles={["admin"]}/>}>
@@ -42,11 +52,12 @@ function App() {
         <Route path="/approvedClaims" element={<ApprovedClaims/>} />
         <Route path="/rejectedClaims" element={<RejectedClaims/>} />
       </Route>
-
+    
       
      
       <Route path="/denied" element={<Forbidden/>} />
       <Route path="*" element={<NotFound/>} />
+      </Route>
      </Routes>
     </>
   )
