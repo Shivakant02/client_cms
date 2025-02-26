@@ -1,11 +1,22 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ClipboardCheck } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { getAllClaims } from "../../redux/slices/adminSlice";
 
 function ApprovedClaims() {
   const { approvedClaims } = useSelector((state) => state.admin.allClaims);
+  const dispatch = useDispatch();
 
+  const hasRun = useRef(false);
+  
+
+  useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
+    if(!approvedClaims) dispatch(getAllClaims());
+  }, [dispatch,approvedClaims]);
   return (
-    <div className="min-h-screen py-16 px-6 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black flex items-center justify-center">
+    <div className="min-h-screen py-16 px-6 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black flex flex-col items-center ">
       <div className="w-full max-w-6xl p-6 backdrop-blur-lg bg-white/30 dark:bg-gray-900/30 border border-gray-900/30 dark:border-white/30 
                       shadow-2xl rounded-2xl text-gray-900 dark:text-white">
         
@@ -25,6 +36,7 @@ function ApprovedClaims() {
               <tr>
                 <th className="px-4 py-3">No.</th>
                 <th className="px-4 py-3">Type</th>
+                <th className="px-4 py-3">Policy Holder</th>
                 <th className="px-4 py-3">Claim Amount</th>
                 <th className="px-4 py-3">Reason</th>
                 <th className="px-4 py-3">Status</th>
@@ -37,6 +49,7 @@ function ApprovedClaims() {
                 <tr key={claim._id} className="hover:bg-white/20 dark:hover:bg-gray-900/40 transition">
                   <td className="px-4 py-3">{index + 1}</td>
                   <td className="px-4 py-3 capitalize">{claim.type}</td>
+                  <td className="px-4 py-3 capitalize">{claim.policyHolder}</td>
                   <td className="px-4 py-3 font-semibold text-green-600 dark:text-green-400">
                     ${claim.claimAmount.toLocaleString()}
                   </td>

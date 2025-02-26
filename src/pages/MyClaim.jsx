@@ -1,22 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteClaim, getClaims } from "../redux/slices/claimSlice";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { myPolicies } from "../redux/slices/policySlice";
+import { getUserProfile } from "../redux/slices/authSlice";
 
 function MyClaim() {
   const { claims } = useSelector((state) => state.claim);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const hasRun = useRef(false);
 
   async function handleDelete(id) {
-    dispatch(deleteClaim(id));
-    window.location.reload();
+    const response=await dispatch(deleteClaim(id));
+    
+    if(response.payload.data.success){
+      dispatch(getClaims());
+      dispatch(myPolicies());
+      dispatch(getUserProfile());
+    }
   }
 
+
   useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
     if (claims.length === 0) dispatch(getClaims());
-  }, [claims.length, dispatch]);
+  }, [claims,claims.length, dispatch]);
 
   return (
     <div className="min-h-screen px-4 py-16 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">

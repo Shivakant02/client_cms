@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { myPolicies } from "../redux/slices/policySlice";
 import PolicyCard from "../components/PolicyCard";
@@ -6,8 +6,11 @@ import PolicyCard from "../components/PolicyCard";
 function MyPolicies() {
   const dispatch = useDispatch();
   const { policies } = useSelector((state) => state.policy);
+  const hasRun = useRef(false);
 
   useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
     if (policies.length === 0) dispatch(myPolicies());
   }, [dispatch, policies.length]);
 

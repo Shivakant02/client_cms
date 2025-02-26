@@ -17,10 +17,10 @@ const Footer = () => {
         <div>
           <h2 className="text-lg font-semibold mb-3">Products</h2>
           <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
-            <li><a href="/buy-policy" className="hover:text-gray-900 dark:hover:text-gray-100">Buy Policy</a></li>
-            <li><a href="/my-policies" className="hover:text-gray-900 dark:hover:text-gray-100">My Policies</a></li>
-            <li><a href="/my-claims" className="hover:text-gray-900 dark:hover:text-gray-100">My Claims</a></li>
-            <li><a href="/about-us" className="hover:text-gray-900 dark:hover:text-gray-100">About Us</a></li>
+            <li><a href="/policies" className="hover:text-gray-900 dark:hover:text-gray-100">Buy Policy</a></li>
+            <li><a href="/myPolicies" className="hover:text-gray-900 dark:hover:text-gray-100">My Policies</a></li>
+            <li><a href="/myClaims" className="hover:text-gray-900 dark:hover:text-gray-100">My Claims</a></li>
+            <li><a href="/about" className="hover:text-gray-900 dark:hover:text-gray-100">About Us</a></li>
           </ul>
         </div>
 
@@ -44,7 +44,7 @@ const Footer = () => {
         <div>
           <h2 className="text-lg font-semibold mb-3">Follow Us</h2>
           <div className="flex space-x-4">
-            <a href="https://github.com/yourgithub" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Shivakant02/client_cms" target="_blank" rel="noopener noreferrer">
               <Github className="w-5 h-5 hover:text-gray-600 dark:hover:text-gray-400" />
             </a>
             <a href="https://twitter.com/yourtwitter" target="_blank" rel="noopener noreferrer">

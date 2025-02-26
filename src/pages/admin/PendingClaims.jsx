@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { approveClaim, approveMultipleClaims, getAllClaims, rejectClaim } from "../../redux/slices/adminSlice";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CheckCircle, XCircle, ClipboardList } from "lucide-react";
 
 function PendingClaims() {
@@ -41,6 +41,14 @@ function PendingClaims() {
         dispatch(getAllClaims());
     }
 
+    const useRun=useRef(false);
+
+    useEffect(() => {
+        if (useRun.current) return;
+        useRun.current = true;
+        if (!pendingClaims) dispatch(getAllClaims());
+    }, [pendingClaims]);
+
     return (
         <div className="min-h-screen py-16 px-4 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black ">
             
@@ -58,7 +66,7 @@ function PendingClaims() {
                         <label className="flex items-center space-x-2 text-sm font-medium">
                             <input
                                 type="checkbox"
-                                checked={selectedClaims.length === pendingClaims.length && pendingClaims.length > 0}
+                                checked={ pendingClaims && selectedClaims.length === pendingClaims.length && pendingClaims.length > 0}
                                 onChange={handleSelectAll}
                                 className="h-4 w-4 border-gray-300 rounded text-blue-600 focus:ring-blue-500"
                             />
@@ -68,7 +76,7 @@ function PendingClaims() {
                         <button 
                             onClick={handleApproveSelected}
                             className="px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition disabled:opacity-50"
-                            disabled={selectedClaims.length === 0}
+                            disabled={pendingClaims && selectedClaims.length === 0}
                         >
                             Approve Selected
                         </button>
@@ -82,7 +90,7 @@ function PendingClaims() {
                         <thead className="bg-gray-800 text-white uppercase text-sm">
                             <tr>
                                 <th className="px-4 py-3"></th>
-                                <th className="px-4 py-3">No.</th>
+                                <th className="px-4 py-3">Policy Holder</th>
                                 <th className="px-4 py-3">Type</th>
                                 <th className="px-4 py-3">Claim Amount</th>
                                 <th className="px-4 py-3">Reason</th>
@@ -106,7 +114,7 @@ function PendingClaims() {
                                         />
                                     </td>
 
-                                    <td className="px-4 py-3">{index + 1}</td>
+                                    <td className="px-4 py-3">{claim.policyHolder}</td>
                                     <td className="px-4 py-3 capitalize">{claim.type}</td>
 
                                     <td className="px-4 py-3 font-semibold text-green-600 dark:text-green-400">

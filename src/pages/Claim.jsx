@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getClaims, submitClaim } from "../redux/slices/claimSlice";
 import { myPolicies } from "../redux/slices/policySlice";
+import { getUserProfile } from "../redux/slices/authSlice";
 
 function Claim() {
   const { state } = useLocation();
@@ -37,11 +38,10 @@ function Claim() {
     }
 
     const response = await dispatch(submitClaim({ id: state._id, data: userInput }));
-
     if (response.payload?.data?.success) {
-      toast.success(response.payload.data.message);
       dispatch(getClaims());
       dispatch(myPolicies());
+      dispatch(getUserProfile());
 
       navigate("/myClaims");
     } else {

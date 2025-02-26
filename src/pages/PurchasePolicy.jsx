@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createPolicy, myPolicies } from "../redux/slices/policySlice";
+import { getUserProfile } from "../redux/slices/authSlice";
 
 function PurchasePolicy() {
   const { state } = useLocation();
@@ -29,6 +30,7 @@ function PurchasePolicy() {
     const response = await dispatch(createPolicy(data));
     if (response.payload.data.success) {
       dispatch(myPolicies());
+      dispatch(getUserProfile());
       navigate("/myPolicies");
     }
   }

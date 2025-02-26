@@ -2,27 +2,22 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import {resetPassword } from "../redux/slices/authSlice";
+import { resetPassword } from "../redux/slices/authSlice";
 
 function ResetPassword() {
-    const location=useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const resetToken=new URLSearchParams(location.search).get("token");
+  const resetToken = new URLSearchParams(location.search).get("token");
+
   const [userInput, setUserInput] = useState({
     newPassword: "",
     confirmPassword: "",
   });
 
   function handleUserInput(e) {
-    const { name, value } = e.target;
-    setUserInput({
-      ...userInput,
-      [name]: value,
-    });
+    setUserInput({ ...userInput, [e.target.name]: e.target.value });
   }
-
-  // console.log(userInput)
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,80 +27,70 @@ function ResetPassword() {
       return;
     }
 
-    if(userInput.newPassword !== userInput.confirmPassword){
-        toast.error("Password does not match");
-        return;
+    if (userInput.newPassword !== userInput.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
     }
 
-    const response = await dispatch(resetPassword({resetToken,data:userInput}));
+    const response = await dispatch(resetPassword({ resetToken, data: userInput }));
 
     if (response.payload.data.success) {
-      // toast.success(response.payload.data.message);
       navigate("/login");
+    } else {
+      toast.error("Something went wrong. Try again.");
     }
   }
+
   return (
-    <div className=" flex items-center justify-center">
-    <div className="min-h-96 px-8 py-6 mt-4 text-left bg-white dark:bg-gray-900 rounded-xl shadow-lg">
-      <div className="flex flex-col justify-center items-center h-full select-none">
-        <div className="flex flex-col items-center justify-center gap-2 mb-8">
-          <p className="m-0 text-[16px] font-semibold dark:text-white">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+      <div className="bg-white/30 dark:bg-gray-800/30 backdrop-blur-lg border border-white/20 dark:border-gray-700 rounded-xl p-8 w-[90%] max-w-md shadow-lg">
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-white text-center mb-4">
           Reset Password
-          </p>
-          <span className="m-0 text-xs min-w-[90%] text-center text-[#8B8E98]">
-            Get started with our app, just start section and enjoy
-            experience.
-          </span>
-        </div>
-        <div className="w-full flex flex-col gap-2">
-          <label
-            htmlFor="newPassword"
-            className="font-semibold text-xs text-gray-400"
-          >
+        </h2>
+        <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-6">
+          Enter a new password for your account.
+        </p>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* New Password */}
+          <label className="text-gray-700 dark:text-gray-300 text-sm font-medium">
             New Password
           </label>
           <input
-            required
+            type="password"
+            name="newPassword"
             value={userInput.newPassword}
             onChange={handleUserInput}
-            name="newPassword"
-            id="newPassword"
-            type="password"
             placeholder="••••••••"
-            className=" text-white border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900"
+            className="w-full px-4 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white"
+            required
           />
-        </div>
-      </div>
-      <div className="w-full flex flex-col gap-2">
-        <label
-          htmlFor="confirmPassword"
-          className="font-semibold text-xs text-gray-400"
-        >
-          Confirm Password
-        </label>
-        <input
-          required
-          value={userInput.confirmPassword}
-          onChange={handleUserInput}
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder="••••••••"
-          className="border rounded-lg px-3 py-2 mb-5 text-sm w-full outline-none dark:border-gray-500 dark:bg-gray-900 text-white"
-          type="password"
-        />
-      </div>
-      <div>
-        <button
-          onClick={handleSubmit}
-          className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
-        >
-          Reset Password
-        </button>
+
+          {/* Confirm Password */}
+          <label className="text-gray-700 dark:text-gray-300 text-sm font-medium">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={userInput.confirmPassword}
+            onChange={handleUserInput}
+            placeholder="••••••••"
+            className="w-full px-4 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white"
+            required
+          />
+
+          {/* Reset Button */}
+          <button
+            type="submit"
+            className="py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all"
+          >
+            Reset Password
+          </button>
+        </form>
       </div>
     </div>
-  </div>
-
-  )
+  );
 }
 
-export default ResetPassword
+export default ResetPassword;

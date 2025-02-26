@@ -61,7 +61,7 @@ function Navbar() {
       {/* Right - Icons & Actions */}
       <div className="flex items-center gap-4">
         {/* GitHub Icon */}
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/Shivakant02/client_cms" target="_blank" rel="noopener noreferrer">
           <Github size={24} className={`${theme === "dark" ? "text-white" : "text-gray-900"}`} />
         </a>
         <ThemeToggle />

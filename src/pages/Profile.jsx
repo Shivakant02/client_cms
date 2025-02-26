@@ -1,8 +1,16 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getUserProfile } from "../redux/slices/authSlice";
 
 function Profile() {
   const userData = useSelector((state) => state.auth.currentUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(!userData)
+     dispatch(getUserProfile());
+  }, [dispatch,userData]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">

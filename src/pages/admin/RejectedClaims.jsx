@@ -1,9 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Ban } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { getAllClaims } from "../../redux/slices/adminSlice";
 
 function RejectedClaims() {
   const { rejectedClaims } = useSelector((state) => state.admin.allClaims);
+  const dispatch=useDispatch()
+  const useRun=useRef()
 
+  useEffect(()=>{
+    if (useRun.current) return;
+    useRun.current = true;
+    if (!rejectedClaims) dispatch(getAllClaims());
+  },[dispatch,rejectedClaims])
   return (
     <div className="min-h-screen py-16 px-6 bg-gradient-to-br from-blue-100 via-indigo-200 to-purple-200 dark:from-gray-900 dark:via-gray-800 dark:to-black flex flex-col items-center">
       <div className="w-full max-w-6xl p-6 backdrop-blur-lg bg-white/30 dark:bg-gray-900/30 border border-gray-900/30 dark:border-white/30 
@@ -25,6 +34,7 @@ function RejectedClaims() {
               <tr>
                 <th className="px-4 py-3">No.</th>
                 <th className="px-4 py-3">Type</th>
+                <th className="px-4 py-3">Policy Holder</th>
                 <th className="px-4 py-3">Claim Amount</th>
                 <th className="px-4 py-3">Reason</th>
                 <th className="px-4 py-3">Status</th>
@@ -37,6 +47,7 @@ function RejectedClaims() {
                 <tr key={claim._id} className="hover:bg-white/20 dark:hover:bg-gray-900/40 transition">
                   <td className="px-4 py-3">{index + 1}</td>
                   <td className="px-4 py-3 capitalize">{claim.type}</td>
+                  <td className="px-4 py-3 capitalize">{claim.policyHolder}</td>
                   <td className="px-4 py-3 font-semibold text-red-600 dark:text-red-400">
                     ${claim.claimAmount.toLocaleString()}
                   </td>
